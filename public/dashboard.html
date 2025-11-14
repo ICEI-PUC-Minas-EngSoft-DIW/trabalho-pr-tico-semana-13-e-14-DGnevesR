@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zwitter - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html"><img src="img/logo.jpg" alt="Logo" class="logo-img"></a>
+    </div>
+    <div class="postar-central">
+      <input type="text" placeholder="O que está acontecendo?">
+    </div>
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="dashboard-container">
+    <h1 class="dashboard-title">Dashboard de Engajamento</h1>
+    <div class="chart-container">
+      <canvas id="engagementChart"></canvas>
+    </div>
+  </main>
+
+  <footer class="rodape">
+    <div class="conteudo-rodape">
+      <div class="coluna"><h2>Contato</h2><p>+55 (31) 99999-9999</p><p>davigamarano@gmail.com</p></div>
+      <div class="coluna"><h2>Sobre</h2><p>Profissional de tecnologia focado em bancos de dados e migração de sistemas legados.</p></div>
+      <div class="coluna"><h2>Carreira</h2><p>2022-2024 Cotemig - Informática<br>2025... PUC Minas - Engenharia de Software</p></div>
+    </div>
+  </footer>
+
+  <script src="js/dashboard.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

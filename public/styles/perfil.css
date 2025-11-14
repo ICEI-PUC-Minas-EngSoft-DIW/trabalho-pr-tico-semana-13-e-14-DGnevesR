@@ -1,0 +1,48 @@
+.perfil-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #252627);
+  border: 2px solid #0d6efd;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 700px;
+  margin: 40px auto;
+  color: white;
+  box-shadow: 0 8px 25px rgba(13, 110, 253, 0.2);
+  transition: all 0.3s ease;
+}
+.perfil-card:hover { 
+  transform: translateY(-5px); }
+
+.perfil-card .avatar {
+  width: 130px; 
+  height: 130px; 
+  border-radius: 50%; 
+  overflow: hidden;
+  border: 4px solid #0d6efd; 
+  margin-right: 30px;
+  box-shadow: 0 0 15px rgba(13, 110, 253, 0.4);
+}
+.perfil-card .avatar img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; }
+
+.perfil-card .info .nome { 
+  font-size: 2rem; 
+  font-weight: bold; 
+  margin: 0 0 8px 0; }
+
+.perfil-card .info .arroba { 
+  font-size: 1.3rem; 
+  color: #0d6efd; 
+  margin: 0 0 8px 0; }
+
+.perfil-card .info .email { 
+  font-size: 1.1rem; 
+  color: #ccc; 
+  margin: 0 0 20px 0; }
+
+.perfil-card .acoes { 
+  display: flex; 
+  gap: 10px; }
