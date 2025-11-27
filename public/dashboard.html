@@ -7,39 +7,27 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
   <link rel="stylesheet" href="styles/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="index.html"><img src="img/logo.jpg" alt="Logo" class="logo-img"></a>
-    </div>
-    <div class="postar-central">
-      <input type="text" placeholder="O que está acontecendo?">
-    </div>
-    <nav class="nav-bar">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a></div>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </header>
 
-  <main class="dashboard-container">
-    <h1 class="dashboard-title">Dashboard de Engajamento</h1>
-    <div class="chart-container">
-      <canvas id="engagementChart"></canvas>
-    </div>
-  </main>
-
-  <footer class="rodape">
-    <div class="conteudo-rodape">
-      <div class="coluna"><h2>Contato</h2><p>+55 (31) 99999-9999</p><p>davigamarano@gmail.com</p></div>
-      <div class="coluna"><h2>Sobre</h2><p>Profissional de tecnologia focado em bancos de dados e migração de sistemas legados.</p></div>
-      <div class="coluna"><h2>Carreira</h2><p>2022-2024 Cotemig - Informática<br>2025... PUC Minas - Engenharia de Software</p></div>
-    </div>
-  </footer>
+    <main class="dashboard-main">
+      <h1>Dashboard de Engajamento</h1>
+      <div class="chart-wrapper">
+        <canvas id="engagementChart"></canvas>
+      </div>
+    </main>
+  </div>
 
   <script src="js/dashboard.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

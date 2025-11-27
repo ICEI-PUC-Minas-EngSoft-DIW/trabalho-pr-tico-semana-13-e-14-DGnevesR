@@ -1,48 +1,25 @@
+.profile-main {
+  max-width: 700px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
 .perfil-card {
+  background: #16181c;
+  border: 1px solid #333;
+  border-radius: 20px;
+  padding: 30px;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, #1a1a1a, #252627);
-  border: 2px solid #0d6efd;
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 700px;
-  margin: 40px auto;
-  color: white;
-  box-shadow: 0 8px 25px rgba(13, 110, 253, 0.2);
-  transition: all 0.3s ease;
+  gap: 30px;
 }
-.perfil-card:hover { 
-  transform: translateY(-5px); }
-
 .perfil-card .avatar {
-  width: 130px; 
-  height: 130px; 
-  border-radius: 50%; 
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
   overflow: hidden;
-  border: 4px solid #0d6efd; 
-  margin-right: 30px;
-  box-shadow: 0 0 15px rgba(13, 110, 253, 0.4);
+  border: 4px solid #1d9bf0;
 }
-.perfil-card .avatar img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; }
-
-.perfil-card .info .nome { 
-  font-size: 2rem; 
-  font-weight: bold; 
-  margin: 0 0 8px 0; }
-
-.perfil-card .info .arroba { 
-  font-size: 1.3rem; 
-  color: #0d6efd; 
-  margin: 0 0 8px 0; }
-
-.perfil-card .info .email { 
-  font-size: 1.1rem; 
-  color: #ccc; 
-  margin: 0 0 20px 0; }
-
-.perfil-card .acoes { 
-  display: flex; 
-  gap: 10px; }
+.perfil-card .avatar img { width: 100%; height: 100%; object-fit: cover; }
+.perfil-card .info h2 { font-size: 1.8rem; margin: 0 0 8px; }
+.perfil-card .info p { margin: 4px 0; color: #71767b; }
+.perfil-card .info .arroba { color: #1d9bf0; font-weight: 600; }

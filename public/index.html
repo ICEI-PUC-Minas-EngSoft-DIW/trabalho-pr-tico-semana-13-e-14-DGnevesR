@@ -6,81 +6,65 @@
   <title>Zwitter</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="index.html"><img src="img/logo.jpg" alt="Logo" class="logo-img"></a>
-    </div>
-    <div class="postar-central">
-      <input type="text" placeholder="O que está acontecendo?">
-    </div>
-    <nav class="nav-bar">
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="perfil.html">Perfil</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <div class="main-container">
-    <aside class="lateral">
-      <div class="perfil">
-        <div class="avatar">
-          <img src="img/perfil.jpg" alt="Foto de perfil">
-        </div>
-        <div class="info">
-          <p class="nome">user.maneiro</p>
-          <p class="arroba">@user.bolado</p>
-        </div>
-      </div>
-      <nav class="menu">
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="perfil.html">Perfil</a></li>
-          <li><a href="cadastro.html">Editar Perfil</a></li>
-        </ul>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a></div>
+      <nav class="nav">
+        <a href="index.html" class="active">Início</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="perfil.html">Perfil</a>
       </nav>
-    </aside>
+    </header>
 
-    <main class="feed"></main>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="profile-sidebar">
+          <img src="img/perfil.jpg" alt="Perfil" class="avatar-sidebar">
+          <div>
+            <p class="nome-sidebar">user.maneiro</p>
+            <p class="arroba-sidebar">@user.bolado</p>
+          </div>
+        </div>
+        <nav class="nav-sidebar">
+          <a href="index.html">Início</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="perfil.html">Perfil</a>
+          <a href="cadastro.html">Editar Perfil</a>
+        </nav>
+      </aside>
 
-    <aside class="direita">
-      <div class="noticias">
-        <p>@Ana_Aninha_Anão</p>
-        <p>When an unknown printer took a galley to make a type specimen book.</p>
+      <main class="feed"></main>
+
+      <aside class="trends">
+        <div class="trend-card">
+          <p class="trend-user">@Ana_Aninha_Anão</p>
+          <p>When an unknown printer took a galley to make a type specimen book.</p>
+        </div>
+        <div class="trend-card">
+          <p class="trend-user">@Frio_Gelado</p>
+          <p>Printer took a specimen book galley to make when an unknown a type.</p>
+          <img src="img/balao.avif" alt="Trend">
+        </div>
+      </aside>
+    </div>
+
+    <section class="highlights">
+      <h2>Destaques</h2>
+      <div id="highlightCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators"></div>
+        <div class="carousel-inner"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#highlightCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#highlightCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
       </div>
-      <div class="noticias">
-        <p>@Frio_Gelado</p>
-        <p>Printer took a specimen book galley to make when an unknown a type.</p>
-        <img src="img/balao.avif" alt="Notícia 2">
-      </div>
-    </aside>
+    </section>
   </div>
-
-  <section class="highlight-section">
-    <h2 class="section-title">Destaques</h2>
-    <div id="highlightCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators"></div>
-      <div class="carousel-inner"></div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#highlightCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#highlightCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-    </div>
-  </section>
-
-  <footer class="rodape">
-    <div class="conteudo-rodape">
-      <div class="coluna"><h2>Contato</h2><p>+55 (31) 99999-9999</p><p>davigamarano@gmail.com</p></div>
-      <div class="coluna"><h2>Sobre</h2><p>Profissional de tecnologia focado em bancos de dados e migração de sistemas legados.</p></div>
-      <div class="coluna"><h2>Carreira</h2><p>2022-2024 Cotemig - Informática<br>2025... PUC Minas - Engenharia de Software</p></div>
-    </div>
-  </footer>
 
   <script src="js/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
