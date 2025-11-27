@@ -5,6 +5,10 @@ async function loadPosts() {
     const res = await fetch('http://localhost:3000/posts');
     if (!res.ok) throw new Error('API offline');
     posts = await res.json();
+
+    // ordena do mais novo para o mais antigo
+    posts.sort((a, b) => b.id - a.id);
+
     renderPosts();
     renderCarousel();
     renderPostDetails();
@@ -17,8 +21,8 @@ async function loadPosts() {
 function updateProfileInfo() {
   const perfil = JSON.parse(localStorage.getItem('zwitter_perfil'));
   if (perfil) {
-    document.querySelectorAll('.info .nome').forEach(el => el.textContent = perfil.nome);
-    document.querySelectorAll('.info .arroba').forEach(el => el.textContent = perfil.arroba);
+    document.querySelectorAll('.nome-sidebar').forEach(el => el.textContent = perfil.nome || 'user.maneiro');
+    document.querySelectorAll('.arroba-sidebar').forEach(el => el.textContent = perfil.arroba || '@user.bolado');
   }
 }
 
@@ -48,12 +52,12 @@ function renderCarousel() {
   if (!inner || !indicators) return;
   inner.innerHTML = '';
   indicators.innerHTML = '';
-  posts.forEach((p, i) => {
+  posts.slice(0, 5).forEach((p, i) => {
     const active = i === 0 ? 'active' : '';
     indicators.innerHTML += `<button type="button" data-bs-target="#highlightCarousel" data-bs-slide-to="${i}" class="${active}"></button>`;
     inner.innerHTML += `
       <div class="carousel-item ${active}">
-        <img src="${p.image}" class="d-block w-100" alt="${p.username}" style="max-height:400px;object-fit:cover;">
+        <img src="${p.image || 'img/placeholder.jpg'}" class="d-block w-100" alt="${p.username}" style="max-height:400px;object-fit:cover;">
         <div class="carousel-caption d-block">
           <h5>${p.username}</h5>
           <p>${p.text.substring(0,100)}${p.text.length > 100 ? '...' : ''}</p>
@@ -72,11 +76,10 @@ function renderPostDetails() {
   if (!post) return;
 
   document.getElementById('post-details').innerHTML = `
-    <p><strong>Usuário:</strong> ${post.username} (${post.handle})</p>
-    <p><strong>Data:</strong> ${post.date}</p>
-    <p><strong>Texto:</strong> ${post.text}</p>
+    <p><strong>${post.username}</strong> ${post.handle} · ${post.date}</p>
+    <p>${post.text}</p>
     ${post.image ? `<img src="${post.image}" alt="Post">` : ''}
-    <p><strong>Engajamento:</strong> ❤️ ${post.likes} 🔄 ${post.retweets} 💬 ${post.comments.length}</p>
+    <p>❤️ ${post.likes} 🔄 ${post.retweets} 💬 ${post.comments.length}</p>
   `;
 
   document.getElementById('linked-photos').innerHTML = post.image ? `
@@ -85,13 +88,22 @@ function renderPostDetails() {
 
   const comments = document.getElementById('comments-section');
   comments.innerHTML = post.comments.map(c => `
-    <div class="comment"><p><strong>${c.username}</strong> ${c.handle} · ${c.date}</p><p>${c.text}</p></div>
+    <div class="comment">
+      <p><strong>${c.username}</strong> ${c.handle} · ${c.date}</p>
+      <p>${c.text}</p>
+    </div>
   `).join('') || '<p>Sem comentários.</p>';
 
   document.getElementById('enviar-comentario').onclick = async () => {
     const text = document.getElementById('novo-comentario').value.trim();
     if (!text) return;
-    const comment = { username: "user.maneiro", handle: "@user.bolado", text, date: new Date().toISOString().split('T')[0] };
+    const perfil = JSON.parse(localStorage.getItem('zwitter_perfil') || '{}');
+    const comment = {
+      username: perfil.nome || "Anônimo",
+      handle: perfil.arroba || "@anonimo",
+      text,
+      date: new Date().toISOString().split('T')[0]
+    };
     post.comments.push(comment);
     await fetch(`http://localhost:3000/posts/${id}`, {
       method: 'PATCH',

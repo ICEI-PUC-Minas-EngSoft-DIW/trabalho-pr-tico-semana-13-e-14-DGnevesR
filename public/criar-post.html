@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zwitter - Novo Post</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a></div>
+      <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="perfil.html">Perfil</a>
+      </nav>
+    </header>
+
+    <main class="create-post-container">
+      <div class="create-post-card">
+        <div class="create-header">
+          <button onclick="history.back()" class="btn-close-create">×</button>
+          <h2>Novo Post</h2>
+        </div>
+
+        <div class="post-compose">
+          <img src="img/perfil.jpg" alt="Você" class="avatar-compose">
+          <div class="compose-area">
+            <textarea id="postText" placeholder="O que está acontecendo?" maxlength="280"></textarea>
+            <div id="imagePreview" class="image-preview"></div>
+          </div>
+        </div>
+
+        <div class="compose-footer">
+          <div class="compose-actions">
+            <label class="icon-btn">
+              <input type="file" id="postImage" accept="image/*">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#1d9bf0">
+                <path d="M3 5.5C3 4.119 4.119 3 5.5 3h13C19.881 3 21 4.119 21 5.5v13c0 1.381-1.119 2.5-2.5 2.5h-13C4.119 21 3 19.881 3 18.5v-13zM5.5 5c-.276 0-.5.224-.5.5v9.086l3-3 3.5 3.5 3-3 4 4V5.5c0-.276-.224-.5-.5-.5h-13zM19 15.414l-3-3-3.5 3.5-3-3-3.5 3.5-1.586-1.586L19 15.414z"/>
+              </svg>
+            </label>
+            <span id="charCount" class="char-count">280</span>
+          </div>
+          <button id="btnPostar" class="btn-postar-final" disabled>Postar</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/criar-post.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
