@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const perfil = JSON.parse(localStorage.getItem('zwitter_perfil') || '{}');
-  if (!perfil.arroba) {
+  
+  if (!perfil.id) {
     alert('Você precisa ter um perfil para postar!');
     location.href = 'cadastro.html';
     return;
@@ -21,45 +22,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
-    if (!file) {
-      preview.innerHTML = '';
-      return;
+    preview.innerHTML = '';
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.innerHTML = `<img src="${e.target.result}" alt="Prévia">`;
+      };
+      reader.readAsDataURL(file);
     }
-    const reader = new FileReader();
-    reader.onload = e => {
-      preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-    };
-    reader.readAsDataURL(file);
   });
 
   btnPostar.addEventListener('click', async () => {
     const text = textarea.value.trim();
     if (!text) return;
 
-    const novoPost = {
-      userId: perfil.arroba,
-      username: perfil.nome || 'Usuário',
+    const postBase = {
+      userId: perfil.id,
+      username: perfil.nome,
       handle: perfil.arroba,
       text: text,
       date: new Date().toISOString().split('T')[0],
       likes: 0,
       retweets: 0,
-      comments: []
+      comments: [],
+      image: null
     };
 
     if (fileInput.files[0]) {
       const reader = new FileReader();
       reader.onload = async e => {
-        novoPost.image = e.target.result;
-        await enviarPost(novoPost);
+        postBase.image = e.target.result;
+        await enviar(postBase);
       };
       reader.readAsDataURL(fileInput.files[0]);
     } else {
-      await enviarPost(novoPost);
+      await enviar(postBase);
     }
   });
 
-  async function enviarPost(post) {
+  async function enviar(post) {
     try {
       const res = await fetch('http://localhost:3000/posts', {
         method: 'POST',
@@ -67,11 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(post)
       });
       if (res.ok) {
+        textarea.value = '';
+        fileInput.value = '';
+        preview.innerHTML = '';
+        charCount.textContent = '280';
+        btnPostar.disabled = true;
         alert('Post publicado com sucesso!');
         location.href = 'index.html';
+      } else {
+        alert('Erro ao publicar o post');
       }
     } catch (err) {
-      alert('Erro ao postar. Verifique se o json-server está rodando na porta 3000');
+      alert('Erro de conexão. Verifique se o json-server está rodando na porta 3000');
     }
   }
 });
