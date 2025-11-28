@@ -10,26 +10,26 @@ async function loadData() {
   renderUserPosts(perfil);
 }
 
-function renderPerfil(perfil) {
-  const container = document.getElementById('perfil-container');
-  if (!perfil) {
-    container.innerHTML = `
+function renderPerfil(perfil){
+  const container=document.getElementById('perfil-container');
+  if(!perfil){
+    container.innerHTML=`
       <div class="text-center p-5 bg-dark rounded">
-        <h3>Nenhum perfil cadastrado</h3>
-        <a href="cadastro.html" class="btn btn-primary mt-3">Fazer Cadastro</a>
+        <h3>Você ainda não tem conta</h3>
+        <a href="cadastro.html" class="btn btn-primary mt-3">Criar conta agora</a>
       </div>`;
     return;
   }
-
-  container.innerHTML = `
+  const foto=perfil.foto||'img/perfil.jpg';
+  container.innerHTML=`
     <div class="perfil-card">
       <div class="avatar">
-        <img src="img/perfil.jpg" alt="Foto de perfil">
+        <img src="${foto}" alt="Foto de perfil">
       </div>
       <div class="info">
         <h2 class="nome">${perfil.nome}</h2>
         <p class="arroba">${perfil.arroba}</p>
-        <p class="email">${perfil.email}</p>
+        <p class="email text-muted">${perfil.email}</p>
         <div class="acoes mt-3">
           <a href="cadastro.html" class="btn btn-outline-primary">Editar Perfil</a>
           <a href="criar-post.html" class="btn btn-primary ms-2">Novo Post</a>

@@ -132,10 +132,22 @@ function renderCarousel() {
   });
 }
 
-function updateProfileInfo() {
-  const perfil = JSON.parse(localStorage.getItem('zwitter_perfil') || '{}');
-  document.querySelectorAll('.nome-sidebar').forEach(el => el.textContent = perfil.nome || 'user.maneiro');
-  document.querySelectorAll('.arroba-sidebar').forEach(el => el.textContent = perfil.arroba || '@user.bolado');
+function updateProfileInfo(){
+  const perfil=JSON.parse(localStorage.getItem('zwitter_perfil')||'{}');
+  document.querySelectorAll('.nome-sidebar').forEach(el=>el.textContent=perfil.nome||'Convidado');
+  document.querySelectorAll('.arroba-sidebar').forEach(el=>el.textContent=perfil.arroba||'Faça login');
+  document.querySelectorAll('#avatar-sidebar, .avatar-sidebar').forEach(img=>{
+    img.src=perfil.foto||'img/perfil.jpg';
+  });
+  document.querySelectorAll('a.btn-postar-sidebar').forEach(btn=>{
+    if(!perfil.nome){
+      btn.href='cadastro.html';
+      btn.textContent='Fazer Login';
+    }else{
+      btn.href='criar-post.html';
+      btn.textContent='Postar';
+    }
+  });
 }
 
 async function loadPosts() {
