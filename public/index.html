@@ -7,59 +7,117 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {background:#000;color:#fff;font-family:'Inter',sans-serif}
+    .topbar {position:fixed;top:0;left:0;right:0;height:60px;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);border-bottom:1px solid #333;z-index:1030}
+    .logo img {width:40px;height:40px;border-radius:50%;object-fit:cover}
+    .nav a {color:#e7e9ea;text-decoration:none;font-weight:500;padding:8px 16px;border-radius:30px;transition:background .2s}
+    .nav a:hover,.nav a.active {background:#1d9bf0}
+    .offcanvas {background:#000;border-right:1px solid #333}
+    .offcanvas-body {background:#000}
+    .profile-sidebar {background:#16181c;padding:16px;border-radius:16px;display:flex;align-items:center;gap:12px}
+    .avatar-sidebar {width:56px;height:56px;border-radius:50%;object-fit:cover}
+    .nome-sidebar {font-weight:600;margin:0}
+    .arroba-sidebar {color:#71767b;margin:0;font-size:0.95rem}
+    .btn-postar-sidebar {background:#1d9bf0;color:#fff;font-weight:700;padding:14px 0;border-radius:30px;text-align:center;margin:20px 16px;display:block;text-decoration:none}
+    .btn-postar-sidebar:hover {background:#1a8cd8}
+    .nav-sidebar a {display:block;padding:12px 20px;border-radius:30px;color:#e7e9ea;text-decoration:none;font-weight:500}
+    .nav-sidebar a:hover,.nav-sidebar a.active {background:#1d1f23}
+    .feed {max-width:680px;margin:0 auto}
+    .post,.trend-card {background:#16181c;border:1px solid #333;border-radius:16px;padding:16px;margin-bottom:12px}
+    .post img,.trend-card img {border-radius:12px;max-width:100%;margin-top:12px}
+    .highlight-button {display:inline-block;margin-top:12px;background:#1d9bf0;color:#fff;padding:8px 16px;border-radius:30px;text-decoration:none;font-weight:600;font-size:0.9rem}
+    .highlights {padding:40px 20px;text-align:center}
+    .highlights h2 {font-size:1.8rem;margin-bottom:20px}
+    .carousel-item img {border-radius:16px;max-height:500px;object-fit:cover}
+    .carousel-caption {background:rgba(0,0,0,0.7);border-radius:12px;padding:16px;bottom:20px}
+  </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header class="topbar">
-      <div class="logo">
-        <a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a>
+
+  <header class="topbar d-flex align-items-center justify-content-between px-3 px-md-4">
+    <div class="logo">
+      <a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a>
+    </div>
+    <nav class="nav d-none d-lg-flex gap-4">
+      <a href="index.html" class="active">Início</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="perfil.html">Perfil</a>
+    </nav>
+    <button class="btn d-lg-none text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    </button>
+  </header>
+
+  <div class="offcanvas offcanvas-start text-white" tabindex="-1" id="sidebarMenu">
+    <div class="offcanvas-header border-bottom border-dark">
+      <h5 class="offcanvas-title">Menu</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body pt-4">
+      <div class="profile-sidebar mb-4">
+        <img src="img/perfil.jpg" alt="Perfil" class="avatar-sidebar">
+        <div>
+          <p class="nome-sidebar">user.maneiro</p>
+          <p class="arroba-sidebar">@user.bolado</p>
+        </div>
       </div>
-      <nav class="nav">
+      <a href="criar-post.html" class="btn-postar-sidebar">Postar</a>
+      <nav class="nav-sidebar mt-4">
         <a href="index.html" class="active">Início</a>
         <a href="dashboard.html">Dashboard</a>
         <a href="perfil.html">Perfil</a>
+        <a href="cadastro.html">Editar Perfil</a>
       </nav>
-    </header>
+    </div>
+  </div>
 
-    <div class="layout">
-      <aside class="sidebar">
-        <div class="profile-sidebar">
-          <img src="img/perfil.jpg" alt="Perfil" class="avatar-sidebar">
-          <div>
-            <p class="nome-sidebar">user.maneiro</p>
-            <p class="arroba-sidebar">@user.bolado</p>
+  <div class="container-fluid" style="margin-top:80px;padding-bottom:40px">
+    <div class="row justify-content-center">
+
+      <div class="col-lg-3 d-none d-lg-block position-sticky top-0" style="max-height:100vh;overflow-y:auto">
+        <div class="p-3">
+          <div class="profile-sidebar mb-4">
+            <img src="img/perfil.jpg" alt="Perfil" class="avatar-sidebar">
+            <div>
+              <p class="nome-sidebar">user.maneiro</p>
+              <p class="arroba-sidebar">@user.bolado</p>
+            </div>
+          </div>
+          <a href="criar-post.html" class="btn-postar-sidebar d-block">Postar</a>
+          <nav class="nav-sidebar mt-4">
+            <a href="index.html" class="active">Início</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="cadastro.html">Editar Perfil</a>
+          </nav>
+        </div>
+      </div>
+
+      <main class="col-12 col-lg-6 feed px-0 px-md-3"></main>
+
+      <aside class="col-lg-3 d-none d-xl-block position-sticky top-0" style="max-height:100vh;overflow-y:auto">
+        <div class="p-3">
+          <div class="trend-card">
+            <p class="trend-user fw-bold">@Ana_Aninha_Anão</p>
+            <p>When an unknown printer took a galley to make a type specimen book.</p>
+          </div>
+          <div class="trend-card">
+            <p class="trend-user fw-bold">@Frio_Gelado</p>
+            <p>Printer took a specimen book galley to make when an unknown a type.</p>
+            <img src="img/balao.avif" alt="Trend">
           </div>
         </div>
-
-        <div class="postar-sidebar">
-          <a href="criar-post.html" class="btn-postar-sidebar">Postar</a>
-        </div>
-
-        <nav class="nav-sidebar">
-          <a href="index.html">Início</a>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="perfil.html">Perfil</a>
-          <a href="cadastro.html">Editar Perfil</a>
-        </nav>
       </aside>
 
-      <main class="feed"></main>
-
-      <aside class="trends">
-        <div class="trend-card">
-          <p class="trend-user">@Ana_Aninha_Anão</p>
-          <p>When an unknown printer took a galley to make a type specimen book.</p>
-        </div>
-        <div class="trend-card">
-          <p class="trend-user">@Frio_Gelado</p>
-          <p>Printer took a specimen book galley to make when an unknown a type.</p>
-          <img src="img/balao.avif" alt="Trend">
-        </div>
-      </aside>
     </div>
+  </div>
 
-    <section class="highlights">
-      <h2>Destaques</h2>
+  <section class="highlights">
+    <div class="container">
+      <h2 class="text-center mb-4">Destaques</h2>
       <div id="highlightCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators"></div>
         <div class="carousel-inner"></div>
@@ -70,8 +128,8 @@
           <span class="carousel-control-next-icon"></span>
         </button>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <script src="js/app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

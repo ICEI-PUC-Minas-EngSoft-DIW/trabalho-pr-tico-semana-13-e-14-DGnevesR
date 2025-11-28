@@ -35,7 +35,14 @@
       "date": "2025-10-02",
       "likes": 85,
       "retweets": 30,
-      "comments": []
+      "comments": [
+        {
+          "username": "Davi",
+          "handle": "odavii.ga",
+          "text": "lalala",
+          "date": "2025-11-28"
+        }
+      ]
     },
     {
       "id": 3,
