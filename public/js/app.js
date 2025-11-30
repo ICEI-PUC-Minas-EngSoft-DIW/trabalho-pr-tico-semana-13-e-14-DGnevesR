@@ -6,18 +6,18 @@ async function loadPosts() {
   posts.sort((a, b) => b.id - a.id);
   renderFeed();
   renderCarousel();
-  renderPostDetails();
 }
 
 function renderFeed() {
   const feed = document.querySelector('.feed');
   if (!feed || (!window.location.pathname.includes('index.html') && window.location.pathname !== '/')) return;
+
   feed.innerHTML = posts.map(p => `
     <div class="post mb-4 p-3 border rounded bg-dark">
       <p class="mb-1"><strong>${p.username}</strong> <span class="text-muted">${p.handle} · ${p.date}</span></p>
       <p>${p.text}</p>
       ${p.image ? `<img src="${p.image}" class="img-fluid rounded mb-2" style="max-height:500px;">` : ''}
-      <div class="text-muted small">❤️ ${p.likes} · 🔄 ${p.retweets} · 💬 ${p.comments.length}</div>
+      <div class="text-muted small">Like ${p.likes} · Retweet ${p.retweets} · Comment ${p.comments.length}</div>
       <a href="detalhes.html?id=${p.id}" class="btn btn-outline-primary btn-sm mt-2">Ver detalhes</a>
     </div>
   `).join('');
@@ -27,8 +27,10 @@ function renderCarousel() {
   const inner = document.querySelector('#highlightCarousel .carousel-inner');
   const indicators = document.querySelector('#highlightCarousel .carousel-indicators');
   if (!inner || !indicators) return;
+
   inner.innerHTML = '';
   indicators.innerHTML = '';
+
   posts.slice(0, 5).forEach((p, i) => {
     const active = i === 0 ? 'active' : '';
     indicators.innerHTML += `<button type="button" data-bs-target="#highlightCarousel" data-bs-slide-to="${i}" class="${active}"></button>`;
@@ -51,15 +53,27 @@ function getPostId() {
 
 async function renderPostDetails() {
   if (!window.location.pathname.includes('detalhes.html')) return;
-  await loadPosts();
+
   const id = getPostId();
-  const post = posts.find(p => p.id === id);
-  const perfil = JSON.parse(localStorage.getItem('zwitter_perfil'));
+  if (!id) {
+    document.getElementById('post-details').innerHTML = '<p class="text-center">Post não encontrado.</p>';
+    return;
+  }
+
+  if (posts.length === 0) await loadPosts();
+
+  let post = posts.find(p => p.id === id);
+  if (!post) {
+    const res = await fetch(`http://localhost:3000/posts/${id}`);
+    if (res.ok) post = await res.json();
+  }
 
   if (!post) {
     document.getElementById('post-details').innerHTML = '<p class="text-center">Post não encontrado.</p>';
     return;
   }
+
+  const perfil = JSON.parse(localStorage.getItem('zwitter_perfil') || '{}');
 
   document.getElementById('post-details').innerHTML = `
     <div class="post-detail-card p-4 bg-dark rounded border">
@@ -72,15 +86,15 @@ async function renderPostDetails() {
       </div>
       <p class="fs-5">${post.text}</p>
       ${post.image ? `<img src="${post.image}" class="img-fluid rounded my-3" style="max-height:600px;">` : ''}
-      <p class="text-muted">❤️ ${post.likes} · 🔄 ${post.retweets} · 💬 ${post.comments.length}</p>
+      <p style="color:#aaa;font-size:0.95rem;margin-top:12px;">
+        Like ${post.likes} · Retweet ${post.retweets} · Comment ${post.comments.length}
+      </p>
     </div>`;
 
-  document.getElementById('linked-photos').innerHTML = post.image 
-    ? `<h4>Foto do post</h4><img src="${post.image}" class="img-fluid rounded">` 
-    : '<p>Sem foto.</p>';
+  document.getElementById('linked-photos').innerHTML = '';
 
   const commentsDiv = document.getElementById('comments-section');
-  commentsDiv.innerHTML = post.comments.length === 0 
+  commentsDiv.innerHTML = post.comments.length === 0
     ? '<p class="text-muted">Nenhum comentário.</p>'
     : post.comments.map(c => `
       <div class="border-bottom pb-3 mb-3">
@@ -92,8 +106,9 @@ async function renderPostDetails() {
   const input = document.getElementById('novo-comentario');
   const btn = document.getElementById('enviar-comentario');
 
-  if (!perfil) {
-    input.disabled = btn.disabled = true;
+  if (!perfil.nome) {
+    if (input) input.disabled = true;
+    if (btn) btn.disabled = true;
     commentsDiv.insertAdjacentHTML('beforeend', '<p class="text-center text-muted">Faça login para comentar.</p>');
     return;
   }
@@ -101,18 +116,22 @@ async function renderPostDetails() {
   btn.onclick = async () => {
     const texto = input.value.trim();
     if (!texto) return;
+
     const novo = {
       username: perfil.nome,
       handle: perfil.arroba,
       text: texto,
       date: new Date().toISOString().split('T')[0]
     };
+
     post.comments.push(novo);
+
     await fetch(`http://localhost:3000/posts/${id}`, {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({comments: post.comments})
     });
+
     input.value = '';
     renderPostDetails();
   };
@@ -120,12 +139,17 @@ async function renderPostDetails() {
 
 function updateSidebar() {
   const perfil = JSON.parse(localStorage.getItem('zwitter_perfil') || '{}');
-  document.querySelectorAll('.nome-sidebar').forEach(el => el.textContent = perfil.nome || 'Convidado');
-  document.querySelectorAll('.arroba-sidebar').forEach(el => el.textContent = perfil.arroba || '@usuario');
+  document.querySelectorAll('.nome-sidebar').forEach(el => el.textContent = perfil.nome || 'user.maneiro');
+  document.querySelectorAll('.arroba-sidebar').forEach(el => el.textContent = perfil.arroba || '@user.bolado');
   document.querySelectorAll('.avatar-sidebar, #avatar-sidebar').forEach(img => img.src = perfil.foto || 'img/perfil.jpg');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   updateSidebar();
-  loadPosts();
+
+  if (window.location.pathname.includes('detalhes.html')) {
+    renderPostDetails();
+  } else if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
+    loadPosts();
+  }
 });
