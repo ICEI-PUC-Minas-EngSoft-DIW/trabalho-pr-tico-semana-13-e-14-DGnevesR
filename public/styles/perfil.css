@@ -135,15 +135,17 @@
   object-fit: cover;
 }
 
-.post-item .btn-delete {
+.btn-delete {
   background: transparent;
   border: 1px solid #f91880;
   color: #f91880;
-  font-size: 0.85rem;
-  padding: 6px 12px;
+  font-size: 0.95rem;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
 }
 
-.post-item .btn-delete:hover {
+.btn-delete:hover {
   background: #f91880;
   color: #fff;
 }

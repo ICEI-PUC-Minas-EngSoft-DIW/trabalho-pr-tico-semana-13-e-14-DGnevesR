@@ -1,58 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zwitter - Detalhes do Post</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Zwitter - Detalhes</title>
   <link rel="stylesheet" href="styles/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/perfil.css">
 </head>
 <body>
-  <div class="wrapper">
-    <header class="topbar">
-      <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a></div>
-      <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="perfil.html">Perfil</a>
-      </nav>
-    </header>
+  <header class="topbar">
+    <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Zwitter"></a></div>
+    <nav class="nav">
+      <a href="index.html">Início</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="perfil.html">Perfil</a>
+    </nav>
+  </header>
 
-    <div class="layout">
-      <aside class="sidebar">
-        <div class="profile-sidebar">
-          <img src="img/perfil.jpg" alt="Perfil" class="avatar-sidebar">
-          <div>
-            <p class="nome-sidebar">user.maneiro</p>
-            <p class="arroba-sidebar">@user.bolado</p>
-          </div>
-        </div>
-        <nav class="nav-sidebar">
-          <a href="index.html">Início</a>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="perfil.html">Perfil</a>
-        </nav>
-      </aside>
+  <main style="max-width:900px;margin:100px auto;padding:0 20px">
+    <div id="detalhes-container"></div>
 
-      <main class="feed">
-        <div class="post-detail-card" id="post-details"></div>
-        <div class="section mt-4" id="linked-photos"></div>
-        <div class="section mt-4">
-          <h3 class="mb-3">Comentários</h3>
-          <div id="comments-section" class="mb-4"></div>
-          <div class="comment-box">
-            <input type="text" id="novo-comentario" class="form-control mb-2" placeholder="Escreva um comentário...">
-            <button id="enviar-comentario">Enviar</button>
-          </div>
-        </div>
-      </main>
-
-      <aside class="trends"></aside>
+    <div id="comentario-area" style="margin-top:20px">
+      <textarea id="comentario" rows="3" style="width:100%;padding:12px;border-radius:8px;background:#16181c;color:#fff;border:1px solid #333" placeholder="Escreva um comentário..."></textarea>
+      <div style="display:flex;justify-content:flex-end;margin-top:8px">
+        <button id="btn-comentar" class="highlight-button">Enviar comentário</button>
+      </div>
     </div>
-  </div>
+
+    <div id="comentarios-list" style="margin-top:20px"></div>
+  </main>
 
   <script src="js/app.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/detalhes.js"></script>
 </body>
 </html>

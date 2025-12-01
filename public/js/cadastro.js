@@ -36,12 +36,10 @@ form.addEventListener('submit', e => {
   const arroba = document.getElementById('arroba').value.trim();
   const email = usuario ? usuario.email : document.getElementById('email').value.trim();
   const foto = preview.src;
-
   if (!nome || !arroba || !email) {
     alert('Preencha todos os campos obrigatórios!');
     return;
   }
-
   usuario = {
     nome,
     arroba,
@@ -49,7 +47,6 @@ form.addEventListener('submit', e => {
     foto,
     id: usuario ? usuario.id : email
   };
-
   localStorage.setItem(STORAGE_KEY, JSON.stringify(usuario));
   alert('Perfil salvo com sucesso!');
   window.location.href = 'perfil.html';
